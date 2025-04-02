@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import sikLogo from './assets/SIK.svg'
+import kikLogo from './assets/KIK.png'
 import './App.css'
 
 function App() {
@@ -9,11 +9,11 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+        <a href="https://sahkoinsinoorikilta.fi" target="_blank">
+          <img src={sikLogo} className="logo" alt="SIK logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+        <a href="https://koneinsinoorikilta.fi" target="_blank">
+          <img src={kikLogo} className="logo" alt="KIK logo" />
         </a>
       </div>
       <h1>Vite + React</h1>
