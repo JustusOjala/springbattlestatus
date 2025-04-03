@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import axios from 'axios'
 import sikLogo from './assets/SIK.svg'
 import kikLogo from './assets/KIK.png'
@@ -7,8 +7,8 @@ import './App.css'
 const backend: String = import.meta.env.VITE_BACKEND_URL
 
 function App() {
-  axios.get(backend.concat("/sports")).then((response) => {
-    const sports = response.data;
+  axios.get(backend.concat("/sports")).then((/*response*/) => {
+    //const sports = response.data;
   });
 
   return (
