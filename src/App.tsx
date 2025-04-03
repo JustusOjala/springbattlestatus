@@ -1,10 +1,15 @@
 import { useState } from 'react'
+import axios from 'axios'
 import sikLogo from './assets/SIK.svg'
 import kikLogo from './assets/KIK.png'
 import './App.css'
 
+const backend: String = import.meta.env.VITE_BACKEND_URL
+
 function App() {
-  const [count, setCount] = useState(0)
+  axios.get(backend.concat("/sports")).then((response) => {
+    const sports = response.data;
+  });
 
   return (
     <>
@@ -16,18 +21,12 @@ function App() {
           <img src={kikLogo} className="logo" alt="KIK logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>SIK vs KIK spring battle 2025</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <table>
+          
+        </table>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
