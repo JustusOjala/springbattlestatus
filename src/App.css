@@ -2,8 +2,8 @@ body {
   background: linear-gradient(
     to right, 
     #002d3a 0%, 
-    #002d3a 49.5%,
-    #E997AF 50.5%, 
+    #002d3a 25%,
+    #E997AF 75%, 
     #E997AF 100%
   );
   color: white;
