@@ -18,8 +18,10 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.card {
+.sportTable,th,td{
   padding: 2em;
+  border: 1px solid white;
+  border-collapse: collapse;
 }
 
 .read-the-docs {

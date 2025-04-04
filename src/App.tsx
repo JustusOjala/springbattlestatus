@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import sikLogo from './assets/SIK.svg'
 import kikLogo from './assets/KIK.png'
@@ -35,10 +35,14 @@ function SportRow(sport: SportInfo){
 }
 
 function App() {
-  var sports: SportInfo[] = [];
+  const [sports, setSports] = useState([]);
 
-  axios.get(backend.concat("/sports")).then((response) => {
-    const sports = response.data; 
+  useEffect(() => {
+    axios
+      .get(backend.concat("/sports"))
+      .then((response) => {
+        setSports(response.data)
+      })
   })
 
   return (
@@ -52,20 +56,18 @@ function App() {
         </a>
       </div>
       <h1>SIK vs KIK spring battle 2025</h1>
-      <div className="card">
-        <table>
-          <tbody>
-            <tr>
-              <td>Sport</td>
-              <td>SIK entries</td>
-              <td>SIK distance</td>
-              <td>KIK distance</td>
-              <td>KIK entries</td>
-            </tr>
-            {sports.map((sport) => SportRow(sport))}
-          </tbody>
-        </table>
-      </div>
+      <table className="sportTable">
+        <tbody>
+          <tr>
+            <td>Sport</td>
+            <td>SIK entries</td>
+            <td>SIK distance</td>
+            <td>KIK distance</td>
+            <td>KIK entries</td>
+          </tr>
+          {sports.map((sport) => SportRow(sport))}
+        </tbody>
+      </table>
     </>
   )
 }
