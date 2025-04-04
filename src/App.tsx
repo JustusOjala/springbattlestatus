@@ -46,6 +46,16 @@ function SportRow(sport: SportInfo){
 
 function App() {
   const [sports, setSports] = useState([]);
+  const [participants, setParticipants] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(backend.concat("/participants"))
+      .then((response) => {
+        setParticipants(response.data)
+      })
+      .catch(() => console.log("Could not get participant info"))
+  },[])
 
   useEffect(() => {
     axios
@@ -67,6 +77,7 @@ function App() {
         </a>
       </div>
       <h1>SIK vs KIK spring battle 2025</h1>
+      <h2>{participants[0] || "N/A"}&emsp;Participants&emsp;{participants[1] || "N/A"}</h2>
       <table className="sportTable">
         <tbody>
           <tr>
