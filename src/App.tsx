@@ -6,7 +6,7 @@ import './App.css'
 
 const backend: String = import.meta.env.VITE_BACKEND_URL
 
-//type Guild = "SIK" | "KIK";
+type Guild = "SIK" | "KIK" | null;
 
 enum Sport {
   activity = "Activity",
@@ -16,21 +16,31 @@ enum Sport {
 
 interface SportInfo {
   sport: Sport;
-  sik_sum: Number;
-  kik_sum: Number;
-  sik_entries: Number;
-  kik_entries: Number;
+  sik_sum: number;
+  kik_sum: number;
+  sik_entries: number;
+  kik_entries: number;
 }
 
 function SportRow(sport: SportInfo){
+  const leader: Guild = sport.sik_sum != sport.kik_sum ? sport.sik_sum > sport.kik_sum ? "SIK" : "KIK" : null; 
+  const difference: number = Math.abs(sport.sik_sum - sport.kik_sum);
+
   return (
-    <tr>
-      <td>{sport.sport.toString()}</td>
-      <td>{sport.sik_entries.toString()}</td>
-      <td>{sport.sik_sum.toString()}</td>
-      <td>{sport.kik_sum.toString()}</td>
-      <td>{sport.kik_entries.toString()}</td>
-    </tr>
+    <>
+      <tr>
+        <td></td><td></td>
+        <td className="sportHeader">{sport.sport}</td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td>{sport.sik_entries.toString()}</td>
+        <td>{sport.sik_sum.toFixed(1)}</td>
+        <td>{leader ? `${leader} by ${difference.toFixed(1)}` : "even"}</td>
+        <td>{sport.kik_sum.toFixed(1)}</td>
+        <td>{sport.kik_entries.toString()}</td>
+      </tr>
+    </>
   )
 }
 
@@ -59,11 +69,11 @@ function App() {
       <table className="sportTable">
         <tbody>
           <tr>
-            <td>Sport</td>
-            <td>SIK entries</td>
-            <td>SIK distance</td>
-            <td>KIK distance</td>
-            <td>KIK entries</td>
+            <th>SIK entries</th>
+            <th>SIK distance</th>
+            <th>Leader</th>
+            <th>KIK distance</th>
+            <th>KIK entries</th>
           </tr>
           {sports.map((sport) => SportRow(sport))}
         </tbody>
