@@ -6,7 +6,7 @@ import './App.css'
 
 const backend: String = import.meta.env.VITE_BACKEND_URL
 
-type Guild = "SIK" | "KIK";
+//type Guild = "SIK" | "KIK";
 
 enum Sport {
   activity = "Activity",
