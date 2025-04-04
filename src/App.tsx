@@ -53,7 +53,8 @@ function App() {
       .then((response) => {
         setSports(response.data)
       })
-  })
+      .catch(() => console.log("Could not get sport info"))
+  },[])
 
   return (
     <>
