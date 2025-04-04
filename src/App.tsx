@@ -38,8 +38,8 @@ function App() {
   var sports: SportInfo[] = [];
 
   axios.get(backend.concat("/sports")).then((response) => {
-    sports = response.data;
-  });
+    const sports = response.data; 
+  })
 
   return (
     <>
@@ -62,9 +62,7 @@ function App() {
               <td>KIK distance</td>
               <td>KIK entries</td>
             </tr>
-            {SportRow(sports[0])}
-            {SportRow(sports[1])}
-            {SportRow(sports[2])}
+            {sports.map((sport) => SportRow(sport))}
           </tbody>
         </table>
       </div>
