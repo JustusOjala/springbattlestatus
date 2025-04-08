@@ -34,11 +34,11 @@ function SportRow(sport: SportInfo){
         <td></td><td></td>
       </tr>
       <tr>
-        <td>{sport.sik_entries.toString()}</td>
-        <td>{sport.sik_sum.toFixed(1)}</td>
-        <td>{leader ? `${leader} by ${difference.toFixed(1)}` : "even"}</td>
-        <td>{sport.kik_sum.toFixed(1)}</td>
-        <td>{sport.kik_entries.toString()}</td>
+        <td className="sik">{sport.sik_entries.toString()}</td>
+        <td className="sik">{sport.sik_sum.toFixed(1)}</td>
+        <td className={leader ? leader === "SIK" ? "sik" : "kik" : ""}>{leader ? `${leader} by ${difference.toFixed(1)}` : "even"}</td>
+        <td className="kik">{sport.kik_sum.toFixed(1)}</td>
+        <td className="kik">{sport.kik_entries.toString()}</td>
       </tr>
     </>
   )
@@ -117,16 +117,16 @@ function App() {
           <img src={kikLogo} className="logo" alt="KIK logo" />
         </a>
       </div>
-      <h1>SIK vs KIK spring battle 2025</h1>
-      <h2>{participants[0] || "N/A"}&emsp;Participants&emsp;{participants[1] || "N/A"}</h2>
+      <h1><span className="sik">SIK</span> vs <span className="kik">KIK</span> spring battle 2025</h1>
+      <h2><span className="sik">{participants[0] || "N/A"}</span>&emsp;Participants&emsp;<span className="kik">{participants[1] || "N/A"}</span></h2>
       <table className="sportTable">
         <tbody>
           <tr>
-            <th>SIK entries</th>
-            <th>SIK distance</th>
-            <th>Leader</th>
-            <th>KIK distance</th>
-            <th>KIK entries</th>
+            <th className="sik">Entries</th>
+            <th className="sik">Distance</th>
+            <th>Difference</th>
+            <th className="kik">Distance</th>
+            <th className="kik">Entries</th>
           </tr>
           {sports.map((sport) => SportRow(sport))}
         </tbody>

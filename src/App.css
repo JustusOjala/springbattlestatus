@@ -16,6 +16,21 @@ body {
   text-align: center;
 }
 
+.sik {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.sik, p, td{
+  font-weight: "200";
+}
+
+.kik {
+  font-family: "Barlow Condensed", sans-serif;
+  font-style: normal;
+}
+
 .logo {
   height: 10em;
   padding: 1.5em;
@@ -32,14 +47,21 @@ body {
 .sportTable,th,td{
   padding-inline: 1em;
   font-size: 1.3em;
-  font-weight: 500;
+}
+
+.sportTable,th{
+  font-weight: 700;
+}
+
+.sportTable,td{
+  font-weight: 300;
 }
 
 .sportHeader{
   text-align: center;
   padding-top: 1em;
   font-size: 1.4em;
-  font-weight: 1000;
+  font-weight: 900;
 }
 
 .read-the-docs {
