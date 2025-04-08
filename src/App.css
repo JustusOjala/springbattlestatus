@@ -10,6 +10,7 @@ body {
 }
 
 #root {
+  font-family: 'Helvetica';
   max-width: 1920px;
   margin: 0 auto;
   padding: 2rem;
@@ -61,7 +62,7 @@ body {
   text-align: center;
   padding-top: 1em;
   font-size: 1.4em;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .read-the-docs {

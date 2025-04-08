@@ -25,18 +25,19 @@ interface SportInfo {
 function SportRow(sport: SportInfo){
   const leader: Guild = sport.sik_sum != sport.kik_sum ? sport.sik_sum > sport.kik_sum ? "SIK" : "KIK" : null; 
   const difference: number = Math.abs(sport.sik_sum - sport.kik_sum);
+  const leaderClass: string = leader ? leader === "SIK" ? "sik" : "kik" : ""
 
   return (
     <>
       <tr>
         <td></td><td></td>
-        <td className="sportHeader">{sport.sport}</td>
+        <td className={`sportHeader ${leaderClass}`}>{sport.sport}</td>
         <td></td><td></td>
       </tr>
       <tr>
         <td className="sik">{sport.sik_entries.toString()}</td>
         <td className="sik">{sport.sik_sum.toFixed(1)}</td>
-        <td className={leader ? leader === "SIK" ? "sik" : "kik" : ""}>{leader ? `${leader} by ${difference.toFixed(1)}` : "even"}</td>
+        <td className={leaderClass}>{leader ? `${leader} by ${difference.toFixed(1)}` : "even"}</td>
         <td className="kik">{sport.kik_sum.toFixed(1)}</td>
         <td className="kik">{sport.kik_entries.toString()}</td>
       </tr>
