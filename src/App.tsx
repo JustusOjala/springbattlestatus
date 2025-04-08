@@ -136,7 +136,7 @@ function App() {
           <tr>
             <th className="sik">Entries</th>
             <th className="sik">Distance</th>
-            <th>Difference</th>
+              <th>Leader</th>
             <th className="kik">Distance</th>
             <th className="kik">Entries</th>
           </tr>
