@@ -84,7 +84,7 @@ function App() {
   },[newSport])
 
   useEffect( () => {
-    console.log("Sport update effect called")
+    console.log("Sport listener effect called")
 
     if (!listeningSports) {
       console.log("Setting listener for sports")
@@ -101,10 +101,10 @@ function App() {
   }, [listeningSports]);
 
   useEffect( () => {
-    console.log("Participant update effect called")
+    console.log("Participant listener effect called")
 
     if (!listeningSports) {
-      console.log("Setting listener for sports")
+      console.log("Setting listener for participants")
       const events = new EventSource(backend.concat("/participantNotif"));
 
       events.onmessage = (event) => {
