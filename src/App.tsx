@@ -47,25 +47,17 @@ function SportRow(sport: SportInfo){
 function App() {
   const [sports, setSports] = useState<SportInfo[]>([]);
   const [listeningSports, setListeningSports] = useState<boolean>(false);
-  const [newSport, setNewSport] = useState<boolean>(true);
 
   const [participants, setParticipants] = useState<number[]>([]);
   const [listeningParticipants, setListeningParticipants] = useState<boolean>(false);
-  const [newParticipant, setNewParticipant] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log("Participant effect called")
-
-    if(newParticipant){
-      axios
-        .get(backend.concat("/participants"))
-        .then((response) => {
-          setParticipants(response.data)
-        })
-        .catch(() => console.log("Could not get participant info"))
-    
-        setNewParticipant(false);
-    }  
+    axios
+      .get(backend.concat("/participants"))
+      .then((response) => {
+        setParticipants(response.data)
+      })
+      .catch(() => console.log("Could not get participant info"))  
   },[])
 
   useEffect(() => {
@@ -91,6 +83,8 @@ function App() {
           })
           .catch(() => console.log("Could not get sport info"))
       };
+
+      setListeningSports(true);
     }
   }, [listeningSports]);
 
@@ -108,6 +102,8 @@ function App() {
           })
           .catch(() => console.log("Could not get participant info"))
       };
+
+      setListeningParticipants(true);
     }
   }, [listeningParticipants]);
 
