@@ -34,7 +34,7 @@ body {
 
 .logo {
   height: 10em;
-  padding: 1.5em;
+  padding-inline: 3em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -43,6 +43,11 @@ body {
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.sportTable{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sportTable,th,td{

@@ -121,16 +121,19 @@ function App() {
 
   return (
     <>
-      <div>
+      <span style={{"display":"inline-block"}}>
         <a href="https://sahkoinsinoorikilta.fi" target="_blank">
           <img src={sikLogo} className="logo" alt="SIK logo" />
         </a>
+        <h2 className="sik">{participants[0] || "N/A"} participants</h2>
+      </span>
+      <h1 style={{"display":"inline"}}><span className="sik">SIK</span> vs <span className="kik">KIK</span> spring battle 2025</h1>
+      <span style={{"display":"inline-block"}}>
         <a href="https://koneinsinoorikilta.fi" target="_blank">
           <img src={kikLogo} className="logo" alt="KIK logo" />
         </a>
-      </div>
-      <h1><span className="sik">SIK</span> vs <span className="kik">KIK</span> spring battle 2025</h1>
-      <h2><span className="sik">{participants[0] || "N/A"}</span>&emsp;Participants&emsp;<span className="kik">{participants[1] || "N/A"}</span></h2>
+        <h2 className="kik">{participants[1] || "N/A"} participants</h2>
+      </span>
       <table className="sportTable">
         <tbody>
           <tr>
