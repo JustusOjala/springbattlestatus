@@ -27,7 +27,7 @@ function SportRow(sport: SportInfo){
   const difference: number = Math.abs(sport.sik_sum - sport.kik_sum);
   const leaderClass: string = leader ? leader === "SIK" ? "sik" : "kik" : ""
 
-  const numSymbols = 25;
+  const numSymbols = 21;
   const sikSymbols = leader ? Math.round(numSymbols*(sport.sik_sum/(sport.sik_sum + sport.kik_sum))) : Math.floor(numSymbols / 2);
   const kikSymbols = leader ? numSymbols - sikSymbols : Math.floor(numSymbols / 2);
 
@@ -121,31 +121,33 @@ function App() {
 
   return (
     <>
-      <span style={{"display":"inline-block"}}>
+      <h1><span className="sik">SIK</span> vs <span className="kik">KIK</span> spring battle 2025</h1>
+      <span className="logoSpan">
         <a href="https://sahkoinsinoorikilta.fi" target="_blank">
           <img src={sikLogo} className="logo" alt="SIK logo" />
         </a>
         <h2 className="sik">{participants[0] || "N/A"} participants</h2>
       </span>
-      <h1 style={{"display":"inline"}}><span className="sik">SIK</span> vs <span className="kik">KIK</span> spring battle 2025</h1>
-      <span style={{"display":"inline-block"}}>
+      <span className="contentSpan">
+        <table className="sportTable">
+          <tbody>
+            <tr>
+              <th className="sik">Entries</th>
+              <th className="sik">Distance</th>
+                <th>Leader</th>
+              <th className="kik">Distance</th>
+              <th className="kik">Entries</th>
+            </tr>
+            {sports.map((sport) => SportRow(sport))}
+          </tbody>
+        </table>
+      </span>
+      <span className="logoSpan">
         <a href="https://koneinsinoorikilta.fi" target="_blank">
           <img src={kikLogo} className="logo" alt="KIK logo" />
         </a>
         <h2 className="kik">{participants[1] || "N/A"} participants</h2>
       </span>
-      <table className="sportTable">
-        <tbody>
-          <tr>
-            <th className="sik">Entries</th>
-            <th className="sik">Distance</th>
-              <th>Leader</th>
-            <th className="kik">Distance</th>
-            <th className="kik">Entries</th>
-          </tr>
-          {sports.map((sport) => SportRow(sport))}
-        </tbody>
-      </table>
     </>
   )
 }
