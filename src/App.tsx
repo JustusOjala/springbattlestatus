@@ -45,26 +45,77 @@ function SportRow(sport: SportInfo){
 }
 
 function App() {
-  const [sports, setSports] = useState([]);
-  const [participants, setParticipants] = useState([]);
+  const [sports, setSports] = useState<SportInfo[]>([]);
+  const [listeningSports, setListeningSports] = useState<boolean>(false);
+  const [newSport, setNewSport] = useState<boolean>(true);
+
+  const [participants, setParticipants] = useState<number[]>([]);
+  const [listeningParticipants, setListeningParticipants] = useState<boolean>(false);
+  const [newParticipant, setNewParticipant] = useState<boolean>(true);
 
   useEffect(() => {
-    axios
-      .get(backend.concat("/participants"))
-      .then((response) => {
-        setParticipants(response.data)
-      })
-      .catch(() => console.log("Could not get participant info"))
-  },[])
+    console.log("Participant effect called")
+
+    if(newParticipant){
+      axios
+        .get(backend.concat("/participants"))
+        .then((response) => {
+          setParticipants(response.data)
+        })
+        .catch(() => console.log("Could not get participant info"))
+    
+        setNewParticipant(false);
+    }  
+  },[newParticipant])
 
   useEffect(() => {
-    axios
-      .get(backend.concat("/sports"))
-      .then((response) => {
-        setSports(response.data)
-      })
-      .catch(() => console.log("Could not get sport info"))
-  },[])
+    console.log("Sport effect called")
+
+    if(newSport){
+      axios
+        .get(backend.concat("/sports"))
+        .then((response) => {
+          setSports(response.data)
+        })
+        .catch(() => console.log("Could not get sport info"))
+      
+      setNewSport(false);
+    }
+  },[newSport])
+
+  useEffect( () => {
+    console.log("Sport update effect called")
+
+    if (!listeningSports) {
+      console.log("Setting listener for sports")
+      const events = new EventSource(backend.concat("/sportNotif"));
+
+      events.onmessage = (event) => {
+        console.log("Sports updated ", event.data)
+
+        setNewSport(true);
+      };
+
+      setListeningSports(true);
+    }
+  }, [listeningSports]);
+
+  useEffect( () => {
+    console.log("Participant update effect called")
+
+    if (!listeningSports) {
+      console.log("Setting listener for sports")
+      const events = new EventSource(backend.concat("/participantNotif"));
+
+      events.onmessage = (event) => {
+        console.log("Participants updated ", event.data)
+
+        setNewSport(true);
+      };
+
+      setListeningParticipants(true);
+    }
+  }, [listeningParticipants]);
 
   return (
     <>
