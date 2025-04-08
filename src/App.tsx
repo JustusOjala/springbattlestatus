@@ -66,54 +66,48 @@ function App() {
     
         setNewParticipant(false);
     }  
-  },[newParticipant])
+  },[])
 
   useEffect(() => {
-    console.log("Sport effect called")
-
-    if(newSport){
-      axios
-        .get(backend.concat("/sports"))
-        .then((response) => {
-          setSports(response.data)
-        })
-        .catch(() => console.log("Could not get sport info"))
-      
-      setNewSport(false);
-    }
-  },[newSport])
+    axios
+      .get(backend.concat("/sports"))
+      .then((response) => {
+        setSports(response.data)
+      })
+      .catch(() => console.log("Could not get sport info"))
+  },[])
 
   useEffect( () => {
-    console.log("Sport listener effect called")
-
     if (!listeningSports) {
-      console.log("Setting listener for sports")
-      const events = new EventSource(backend.concat("/sportNotif"));
+      const events = new EventSource(backend.concat("/sportnotif"));
 
       events.onmessage = (event) => {
         console.log("Sports updated ", event.data)
 
-        setNewSport(true);
+        axios
+          .get(backend.concat("/sports"))
+          .then((response) => {
+            setSports(response.data)
+          })
+          .catch(() => console.log("Could not get sport info"))
       };
-
-      setListeningSports(true);
     }
   }, [listeningSports]);
 
   useEffect( () => {
-    console.log("Participant listener effect called")
-
-    if (!listeningSports) {
-      console.log("Setting listener for participants")
-      const events = new EventSource(backend.concat("/participantNotif"));
+    if (!listeningParticipants) {
+      const events = new EventSource(backend.concat("/participantnotif"));
 
       events.onmessage = (event) => {
         console.log("Participants updated ", event.data)
 
-        setNewSport(true);
+        axios
+          .get(backend.concat("/participants"))
+          .then((response) => {
+            setParticipants(response.data)
+          })
+          .catch(() => console.log("Could not get participant info"))
       };
-
-      setListeningParticipants(true);
     }
   }, [listeningParticipants]);
 
