@@ -105,9 +105,9 @@ function App() {
             console.log("\tSports changed")
             if(sections[1] && JSON.parse(sections[1])){
               console.log("\t\tNotification includes sport information, updating")
-              const parsedSport: SportInfo = JSON.parse(sections[1])
-              console.log("\t\t\tParsed as", JSON.stringify(parsedSport))
-              setSports((sports) => sports.filter((s) => s.sport !== parsedSport.sport).concat(parsedSport))
+              const newSport: SportInfo = JSON.parse(sections[1])
+              console.log("\t\t\tParsed as", JSON.stringify(newSport))
+              setSports((sports) => sports.map((s) => s.sport === newSport.sport ? newSport : s))
             }else{
               console.log("\t\tNo sport information, fetching")
               axios
