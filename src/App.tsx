@@ -27,15 +27,23 @@ function SportRow(sport: SportInfo){
   const difference: number = Math.abs(sport.sik_sum - sport.kik_sum);
   const leaderClass: string = leader ? leader === "SIK" ? "sik" : "kik" : ""
 
-  const numSymbols = 21;
+  const numSymbols = 51;
+  const symbolWidth = 18;
+  
   const sikSymbols = leader ? Math.round(numSymbols*(sport.sik_sum/(sport.sik_sum + sport.kik_sum))) : Math.floor(numSymbols / 2);
   const kikSymbols = leader ? numSymbols - sikSymbols : Math.floor(numSymbols / 2);
 
-  const leftSikSymbols = "\u26A1".repeat(Math.min(sikSymbols, Math.floor(numSymbols / 2)));
-  const leftKikSymbols = "\u2699".repeat(Math.max(Math.floor(numSymbols / 2) - sikSymbols, 0))
-  const middleSymbol = leader ? leader === "SIK" ? "\u26A1" : "\u2699" : "=";
-  const rightSikSymbols = "\u26A1".repeat(Math.max(Math.floor(numSymbols / 2) - kikSymbols, 0));
-  const rightKikSymbols = "\u2699".repeat(Math.min(kikSymbols, Math.floor(numSymbols / 2)));
+  const sikSymbol = "\u26A1";
+  const kikSymbol = "\u2699";
+
+  const sikElement = <span style={{"display":"inline-block","width":`${symbolWidth}px`,"fontSize":"0.5em"}}>{sikSymbol}</span>;
+  const kikElement = <span style={{"display":"inline-block","width":`${symbolWidth}px`,"fontSize":"0.6em"}}>{kikSymbol}</span>; 
+
+  const leftSikSymbols = [...Array(Math.min(sikSymbols, Math.floor(numSymbols / 2)))].map(() => sikElement);
+  const leftKikSymbols = [...Array(Math.max(Math.floor(numSymbols / 2) - sikSymbols, 0))].map(() => kikElement);
+  const middleSymbol = <span style={{"display":"inline-block","width":`${3*symbolWidth}px`,"fontSize":"1.5em"}}>{leader ? leader === "SIK" ? sikSymbol : kikSymbol : "="}</span>
+  const rightSikSymbols = [...Array(Math.max(Math.floor(numSymbols / 2) - kikSymbols, 0))].map(() => sikElement);
+  const rightKikSymbols = [...Array(Math.min(kikSymbols, Math.floor(numSymbols / 2)))].map(() => kikElement);
 
   return (
     <>
@@ -50,7 +58,7 @@ function SportRow(sport: SportInfo){
         <td className="kik">{sport.kik_entries.toString()}</td>
       </tr>
       <tr>
-        <td colSpan={5}>{leftSikSymbols}{leftKikSymbols}<span className="middleSymbol">{middleSymbol}</span>{rightSikSymbols}{rightKikSymbols}</td>
+        <td colSpan={5}>{leftSikSymbols}{leftKikSymbols}{middleSymbol}{rightSikSymbols}{rightKikSymbols}</td>
       </tr>
     </>
   )
