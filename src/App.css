@@ -64,6 +64,10 @@ h2{
   right:0%;
 }
 
+.participants{
+  font-size:2em;
+}
+
 .contentSpan{
   display: inline-block;
 }
@@ -85,13 +89,16 @@ h2{
   width: 200px;
 }
 
-.sportTable,th{
+.leader{
+  width: 300px;
+}
+
+th{
   font-weight: 700;
 }
 
-.sportTable,td{
+td{
   font-weight: 300;
-  font-size: 1.5em;
 }
 
 .sportHeader{

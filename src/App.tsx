@@ -161,7 +161,7 @@ function App() {
         <a href="https://sahkoinsinoorikilta.fi" target="_blank">
           <img src={sikLogo} className="logo" alt="SIK logo" />
         </a>
-        <h2 className="sik">{participants[0] || "N/A"} participants</h2>
+        <h2 className="sik"><div className="participants">{participants[0] || "N/A"}</div> participants</h2>
       </span>
       <span className="contentSpan">
         <table className="sportTable">
@@ -169,7 +169,7 @@ function App() {
             <tr>
               <th className="sik entries">Entries</th>
               <th className="sik distance">Distance</th>
-              <th>Leader</th>
+              <th className="leader">Leader</th>
               <th className="kik distance">Distance</th>
               <th className="kik entries">Entries</th>
             </tr>
@@ -181,7 +181,7 @@ function App() {
         <a href="https://koneinsinoorikilta.fi" target="_blank">
           <img src={kikLogo} className="logo" alt="KIK logo" />
         </a>
-        <h2 className="kik">{participants[1] || "N/A"} participants</h2>
+        <h2 className="kik"><div className="participants">{participants[1] || "N/A"}</div>participants</h2>
       </span>
     </>
   )
