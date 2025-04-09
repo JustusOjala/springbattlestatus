@@ -67,12 +67,9 @@ function SportRow(sport: SportInfo){
 
 function App() {
   const [sports, setSports] = useState<SportInfo[]>([]);
-  const [listeningSports, setListeningSports] = useState<boolean>(false);
-
   const [participants, setParticipants] = useState<number[]>([]);
-  const [listeningParticipants, setListeningParticipants] = useState<boolean>(false);
 
-  const [listeningReload, setListeningReload] = useState<boolean>(false);
+  const [listening, setListening] = useState<boolean>(false);
 
   useEffect(() => {
     axios
@@ -93,56 +90,44 @@ function App() {
   },[])
 
   useEffect( () => {
-    if (!listeningSports) {
-      const events = new EventSource(backend.concat("/sportnotif"));
+    if (!listening) {
+      const events = new EventSource(backend.concat("/notifications"));
 
       events.onmessage = (event) => {
-        console.log("Sports updated ", event.data)
+        const data = event.data
 
-        axios
-          .get(backend.concat("/sports"))
-          .then((response) => {
-            setSports(response.data)
-          })
-          .catch(() => console.log("Could not get sport info"))
+        console.log("Received notification:", data)
+
+        switch(data){
+          case "logchange":
+            console.log("\tSports updated")
+            axios
+              .get(backend.concat("/sports"))
+              .then((response) => {
+                setSports(response.data)
+              })
+              .catch(() => console.log("Could not get sport info"))
+            break;
+          case "userchange":
+            console.log("\tParticipants updated")
+            axios
+              .get(backend.concat("/participants"))
+              .then((response) => {
+                setParticipants(response.data)
+              })
+              .catch(() => console.log("Could not get participant info"))
+            break;
+          case "reload":
+            console.log("Reload requested")
+            location.reload();
+            break;
+        }
+        
       };
 
-      setListeningSports(true);
+      setListening(true);
     }
-  }, [listeningSports]);
-
-  useEffect( () => {
-    if (!listeningReload) {
-      const events = new EventSource(backend.concat("/reload"));
-
-      events.onmessage = () => {
-        console.log("Reload requested")
-
-        location.reload();
-      };
-
-      setListeningReload(true);
-    }
-  }, [listeningReload]);
-
-  useEffect( () => {
-    if (!listeningParticipants) {
-      const events = new EventSource(backend.concat("/participantnotif"));
-
-      events.onmessage = (event) => {
-        console.log("Participants updated ", event.data)
-
-        axios
-          .get(backend.concat("/participants"))
-          .then((response) => {
-            setParticipants(response.data)
-          })
-          .catch(() => console.log("Could not get participant info"))
-      };
-
-      setListeningParticipants(true);
-    }
-  }, [listeningParticipants]);
+  }, [listening]);
 
   return (
     <>
