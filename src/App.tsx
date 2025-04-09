@@ -103,7 +103,7 @@ function App() {
         switch(sections[0]){
           case "logchange":
             console.log("\tSports changed")
-            if(sections[1] || JSON.parse(sections[1])){
+            if(sections[1] && JSON.parse(sections[1])){
               console.log("\t\tNotification includes sport information, updating")
               const parsedSport: SportInfo = JSON.parse(sections[1])
               console.log("\t\t\tParsed as", JSON.stringify(parsedSport))
