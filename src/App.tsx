@@ -112,7 +112,7 @@ function App() {
   }, [listeningSports]);
 
   useEffect( () => {
-    if (!listeningSports) {
+    if (!listeningReload) {
       const events = new EventSource(backend.concat("/reload"));
 
       events.onmessage = () => {
