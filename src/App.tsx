@@ -102,13 +102,21 @@ function App() {
 
         switch(sections[0]){
           case "logchange":
-            console.log("\tSports updated")
-            axios
-              .get(backend.concat("/sports"))
-              .then((response) => {
-                setSports(response.data)
-              })
-              .catch(() => console.log("Could not get sport info"))
+            console.log("\tSports changed")
+            if(sections[1] || JSON.parse(sections[1])){
+              console.log("\t\tNotification includes sport information, updating")
+              const parsedSport: SportInfo = JSON.parse(sections[1])
+              console.log("\t\t\tParsed as", JSON.stringify(parsedSport))
+              setSports((sports) => sports.filter((s) => s.sport !== parsedSport.sport).concat(parsedSport))
+            }else{
+              console.log("\t\tNo sport information, fetching")
+              axios
+                .get(backend.concat("/sports"))
+                .then((response) => {
+                  setSports(response.data)
+                })
+                .catch(() => console.log("Could not get sport info"))
+            }
             break;
           case "userchange":
             console.log("\tParticipants changed")
@@ -123,12 +131,12 @@ function App() {
               }
             }else{
               console.log("\t\tNo participant information, fetching")
-            axios
-              .get(backend.concat("/participants"))
-              .then((response) => {
-                setParticipants(response.data)
-              })
-              .catch(() => console.log("Could not get participant info"))
+              axios
+                .get(backend.concat("/participants"))
+                .then((response) => {
+                  setParticipants(response.data)
+                })
+                .catch(() => console.log("Could not get participant info"))
             }
             break;
           case "reload":
