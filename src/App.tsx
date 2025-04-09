@@ -29,6 +29,7 @@ function SportRow(sport: SportInfo){
 
   const numSymbols = 51;
   const symbolWidth = 18;
+  const midSymSize = leader ? leader === "SIK" ? 1.5 : 1.8 : 2.2;
   
   const sikSymbols = leader ? Math.round(numSymbols*(sport.sik_sum/(sport.sik_sum + sport.kik_sum))) : Math.floor(numSymbols / 2);
   const kikSymbols = leader ? numSymbols - sikSymbols : Math.floor(numSymbols / 2);
@@ -41,7 +42,7 @@ function SportRow(sport: SportInfo){
 
   const leftSikSymbols = [...Array(Math.min(sikSymbols, Math.floor(numSymbols / 2)))].map(() => sikElement);
   const leftKikSymbols = [...Array(Math.max(Math.floor(numSymbols / 2) - sikSymbols, 0))].map(() => kikElement);
-  const middleSymbol = <span style={{"display":"inline-block","width":`${3*symbolWidth}px`,"fontSize":"1.5em"}}>{leader ? leader === "SIK" ? sikSymbol : kikSymbol : "="}</span>
+  const middleSymbol = <span style={{"display":"inline-block","width":`${3*symbolWidth}px`,"fontSize":`${midSymSize}em`}}>{leader ? leader === "SIK" ? sikSymbol : kikSymbol : "="}</span>
   const rightSikSymbols = [...Array(Math.max(Math.floor(numSymbols / 2) - kikSymbols, 0))].map(() => sikElement);
   const rightKikSymbols = [...Array(Math.min(kikSymbols, Math.floor(numSymbols / 2)))].map(() => kikElement);
 
@@ -140,11 +141,11 @@ function App() {
         <table className="sportTable">
           <tbody>
             <tr>
-              <th className="sik">Entries</th>
-              <th className="sik">Distance</th>
-                <th>Leader</th>
-              <th className="kik">Distance</th>
-              <th className="kik">Entries</th>
+              <th className="sik entries">Entries</th>
+              <th className="sik distance">Distance</th>
+              <th>Leader</th>
+              <th className="kik distance">Distance</th>
+              <th className="kik entries">Entries</th>
             </tr>
             {sports.map((sport) => SportRow(sport))}
           </tbody>
