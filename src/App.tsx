@@ -72,6 +72,8 @@ function App() {
   const [participants, setParticipants] = useState<number[]>([]);
   const [listeningParticipants, setListeningParticipants] = useState<boolean>(false);
 
+  const [listeningReload, setListeningReload] = useState<boolean>(false);
+
   useEffect(() => {
     axios
       .get(backend.concat("/participants"))
@@ -108,6 +110,20 @@ function App() {
       setListeningSports(true);
     }
   }, [listeningSports]);
+
+  useEffect( () => {
+    if (!listeningSports) {
+      const events = new EventSource(backend.concat("/reload"));
+
+      events.onmessage = () => {
+        console.log("Reload requested")
+
+        location.reload();
+      };
+
+      setListeningReload(true);
+    }
+  }, [listeningReload]);
 
   useEffect( () => {
     if (!listeningParticipants) {
