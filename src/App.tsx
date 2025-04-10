@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import ReconnectingEventSource from 'reconnecting-eventsource'
 import sikLogo from './assets/SIK.svg'
 import kikLogo from './assets/KIK.png'
 import './App.css'
@@ -91,7 +92,11 @@ function App() {
 
   useEffect( () => {
     if (!listening) {
-      const events = new EventSource(backend.concat("/notifications"));
+      const events = new ReconnectingEventSource(backend.concat("/notifications"));
+
+      events.onerror = (err) => {
+        console.log("SSE error:",err)
+      }
 
       events.onmessage = (event) => {
         const data: string = event.data
@@ -142,6 +147,9 @@ function App() {
           case "reload":
             console.log("\tReload requested")
             location.reload();
+            break;
+          case "initstream":
+            console.log("\tStream initiated")
             break;
           default:
             console.log("\tUnrecognized notification")
