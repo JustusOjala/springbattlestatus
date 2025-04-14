@@ -151,8 +151,11 @@ function App() {
           case "initstream":
             console.log("\tStream initiated")
             break;
+          case "ping":
+            // Just a keep-alive ping and all info is in earlier log; do nothing
+            break;
           default:
-            console.log("\tUnrecognized notification")
+            console.log("\tUnrecognized notification header", sections[0])
             break;
         }
         
