@@ -11,6 +11,7 @@ type Guild = "SIK" | "KIK" | null;
 
 enum Sport {
   activity = "Activity",
+  steps = "Steps",
   biking = "Biking",
   running_walking = "Running/Walking",
 }
