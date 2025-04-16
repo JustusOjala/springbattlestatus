@@ -10,7 +10,6 @@ const backend: String = import.meta.env.VITE_BACKEND_URL
 type Guild = "SIK" | "KIK" | null;
 
 enum Sport {
-  activity = "Activity",
   steps = "Steps",
   biking = "Biking",
   running_walking = "Running/Walking",
